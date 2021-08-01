@@ -1,6 +1,9 @@
 package com.homewrk.backpack.api.order.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.Value;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 
@@ -9,8 +12,10 @@ import javax.validation.constraints.Pattern;
 import java.sql.Timestamp;
 
 @Data
+@ApiModel(value = "주문정보", description = "회원의 주문정보")
 public class OrderDTO {
 
+    @ApiModelProperty(value = "주문번호" , example = "")
     @NotEmpty
     @Pattern(regexp = "[A-Z|0-9]{12}" , message = "주문번호를 확인해주세요")
     private String ordNum; // 주문번호
