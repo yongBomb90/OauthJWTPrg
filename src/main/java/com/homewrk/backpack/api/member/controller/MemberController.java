@@ -73,15 +73,6 @@ public class MemberController {
             , httpMethod = "POST"
             , consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "memId", value = "고객의 아이디", required = true, dataType = "string",  example = "testId" ),
-            @ApiImplicitParam(name = "name", value = "고객의 이름", required = true, dataType = "string",  example = "test"),
-            @ApiImplicitParam(name = "nickName", value = "고객의 별명", required = true, dataType = "string",  example = "testnick"),
-            @ApiImplicitParam(name = "pwd", value = "고객의 비밀번호 (편의상 평문사용)", required = true, dataType = "string",  example = "Test@123456789"),
-            @ApiImplicitParam(name = "phnNum", value = "고객의 전화번호", required = true, dataType = "string",  example = "01091713590"),
-            @ApiImplicitParam(name = "email", value = "고객의 이메일", required = true, dataType = "string",  example = "docsuli90@gmail.com"),
-            @ApiImplicitParam(name = "sex", value = "고객의 성별", required = false, dataType = "string",  example = "X", defaultValue = "X")
-    })
     @ApiResponses({
                 @ApiResponse(code = 201 , message = "회원가입 성공" )
               , @ApiResponse(code = 409 , message = "아이디 중복" )

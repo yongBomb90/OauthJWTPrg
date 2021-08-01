@@ -68,6 +68,10 @@ public class MemberService implements UserDetailsService {
      */
     @Transactional(readOnly = true)
     public Page<MemberEntity> searchMembers(String name, String email, Pageable pageable) {
+        if ( name == null && email == null ) {
+            name = "";
+            email = "";
+        }
         return memberRepo.findMemberEntitiesByEmailNameOrderByName(name,email,pageable);
     }
 

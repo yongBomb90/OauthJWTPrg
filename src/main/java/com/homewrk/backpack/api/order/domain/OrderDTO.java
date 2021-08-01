@@ -12,23 +12,22 @@ import javax.validation.constraints.Pattern;
 import java.sql.Timestamp;
 
 @Data
-@ApiModel(value = "주문정보", description = "회원의 주문정보")
+@ApiModel(value = "주문정보", description = "고객의 주문정보")
 public class OrderDTO {
 
-    @ApiModelProperty(value = "주문번호" , example = "")
+    @ApiModelProperty(value = "주문번호" , example = "1234567890AB")
     @NotEmpty
     @Pattern(regexp = "[A-Z|0-9]{12}" , message = "주문번호를 확인해주세요")
     private String ordNum; // 주문번호
 
+    @ApiModelProperty(value = "제품명" , example = "테스트제품")
     @NotEmpty
     private String prdName; // 제품명
 
-    @NotEmpty
-    private Integer memSeq; // 주문자
-
-    private Timestamp payDate; // 결제일자
-
-    private Timestamp ordDate; // 주문일자
+    @ApiModelProperty(value = "결제일자" )
+    private String payDate; // 결제일자
+    @ApiModelProperty(value = "주문일자" )
+    private String ordDate; // 주문일자
 
     public static OrderDTO of(OrderEntity order) {
         if ( order == null ) {

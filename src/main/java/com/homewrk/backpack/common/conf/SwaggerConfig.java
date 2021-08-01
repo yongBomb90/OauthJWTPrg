@@ -8,16 +8,15 @@ import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.ModelRef;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.Parameter;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,15 +34,15 @@ public class SwaggerConfig {
     public Docket api(){
 
 
-        Parameter parameterBuilder = new ParameterBuilder()
-            .name(HttpHeaders.AUTHORIZATION)
-                .description("Access Tocken(Bearer +accessToken)")
-                .modelRef(new ModelRef("string"))
-                .parameterType("header")
-                .required(false)
-                .build();
-        List<Parameter> globalParamters = new ArrayList<>();
-        globalParamters.add(parameterBuilder);
+//        Parameter parameterBuilder = new ParameterBuilder()
+//            .name(HttpHeaders.AUTHORIZATION)
+//                .description("Access Tocken(Bearer +accessToken)")
+//                .modelRef(new ModelRef("string"))
+//                .parameterType("header")
+//                .required(false)
+//                .build();
+//        List<Parameter> globalParamters = new ArrayList<>();
+//        globalParamters.add(parameterBuilder);
 
         ApiInfo serverApiInfo = new ApiInfo(
                 "백패커 과제 리소스 API Docs"
@@ -56,13 +55,15 @@ public class SwaggerConfig {
                 ,  new ArrayList<>());
 
         return new Docket(DocumentationType.SWAGGER_2)
-                .globalOperationParameters(globalParamters)
+                //.globalOperationParameters(globalParamters)
                 .groupName("리소스서버")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.homewrk.backpack"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(serverApiInfo)
+                .securityContexts(Collections.singletonList(securityContext()))
+                .securitySchemes(Arrays.asList(securitySchema()))
                 ;
 
     }
@@ -95,16 +96,44 @@ public class SwaggerConfig {
         globalParamters.add(parameterBuilder);
 
         return new Docket(DocumentationType.SWAGGER_2)
-                .globalOperationParameters(globalParamters)
                 .groupName("권한서버(로그인)")
                 .useDefaultResponseMessages(false)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.ant("/oauth/token"))
                 .build()
-                .apiInfo(authApiInfo);
+                .apiInfo(authApiInfo)
+                ;
+
+
+
 
     }
 
+    private OAuth securitySchema() {
+        final List<AuthorizationScope> authorizationScopeList = new ArrayList<>(2);
 
+        authorizationScopeList.add(new AuthorizationScope("read", "read all"));
+        authorizationScopeList.add(new AuthorizationScope("write", "access all"));
+
+        final List<GrantType> grantTypes = new ArrayList<>(1);
+        // 토큰 end point (http://localhost:3000/oauth/token)
+        grantTypes.add(new ResourceOwnerPasswordCredentialsGrant("/oauth/token"));
+
+        return new OAuth("oauth2", authorizationScopeList, grantTypes);
+    }
+    private SecurityContext securityContext() {
+        return SecurityContext.builder()
+                .securityReferences(defaultAuth())
+                .build();
+    }
+
+    private List<SecurityReference> defaultAuth() {
+        final AuthorizationScope[] authorizationScopes = new AuthorizationScope[] {
+                new AuthorizationScope("read", "read all"),
+                new AuthorizationScope("write", "write all")
+        };
+
+        return Collections.singletonList(new SecurityReference("oauth2", authorizationScopes));
+    }
 }

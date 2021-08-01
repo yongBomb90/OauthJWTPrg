@@ -55,7 +55,7 @@ public class ServerConfig extends ResourceServerConfigurerAdapter {
                     .authenticated()
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/oauth/**","/api/member/join").permitAll()
+                    .antMatchers("/oauth/**","/member/**").permitAll()
                 .and()
                     .exceptionHandling()
                     .accessDeniedHandler(new OAuth2AccessDeniedHandler())
