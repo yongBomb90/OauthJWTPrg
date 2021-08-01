@@ -1,0 +1,59 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: backpacker
+  datasource:
+    master:
+      jdbc-url: jdbc:log4jdbc:mysql://ec2-3-35-27-135.ap-northeast-2.compute.amazonaws.com:3306/BACKPACK
+      username: bckpck
+      password: Back1234!
+    slave:
+      jdbc-url: jdbc:log4jdbc:mysql://ec2-3-35-27-135.ap-northeast-2.compute.amazonaws.com:3306/BACKPACK
+      username: bckpck
+      password: Back1234!
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false
+    database: mysql
+  security:
+    user:
+      name: backpack
+      password: Test1234!
+  redis:
+    port: 6379
+    host: 127.0.0.1
+logging:
+  level:
+    root: info
+    mysql: error
+    jdbc:
+      sqlonly: info
+      sqltiming: error
+      audit: warn
+      resultset: error
+      resultsettable: error
+      connection: error
+    com:
+      homewrk:
+        backpack: info
+  pattern:
+    console: "%d [%-5level] %-30logger{30}.%M : %msg%n"
+---
+backpack:
+  oauth:
+    client: backpack
+    secret: Test1234!
+    signing-key: backpack_secret
+    access-expire: 10000
+    refresh-expire: 10000
+  api:
+    server-id: backpackapi
