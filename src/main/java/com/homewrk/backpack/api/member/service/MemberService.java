@@ -68,17 +68,7 @@ public class MemberService implements UserDetailsService {
      */
     @Transactional(readOnly = true)
     public Page<MemberEntity> searchMembers(String name, String email, Pageable pageable) {
-
-        if ( name == null && email == null ) {
-            return memberRepo.findMemberEntitiesByOrderByName(pageable);
-        } else if ( name == null ){
-            return memberRepo.findMemberEntitiesByEmailContainsOrderByName(email,pageable);
-        } else if ( email == null){
-            return memberRepo.findMemberEntitiesByNameContainsOrderByName(name,pageable);
-        } else {
-            return memberRepo.findMemberEntitiesByNameContainsOrEmailContainsOrderByName(name,email,pageable);
-        }
-
+        return memberRepo.findMemberEntitiesByEmailNameOrderByName(name,email,pageable);
     }
 
     /**
@@ -89,12 +79,7 @@ public class MemberService implements UserDetailsService {
      */
     @Transactional(readOnly = true)
     public Page<OrderEntity> searchMemberOrders(String memId, Pageable pageable) {
-
-        MemberEntity member = memberRepo.getMemberEntityByMemId(memId);
-        if ( member == null ) {
-            return null;
-        }
-        return orderRepo.getOrderEntitiesByMemSeqEqualsOrderByOrdDate(member.getSeq(),pageable);
+        return orderRepo.getOrderEntitiesByMemIdOrderByOrdDate(memId,pageable);
     }
 
     /**

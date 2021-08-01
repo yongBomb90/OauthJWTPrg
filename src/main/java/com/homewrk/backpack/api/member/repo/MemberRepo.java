@@ -4,6 +4,7 @@ import com.homewrk.backpack.api.member.domain.MemberEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 
 public interface MemberRepo extends JpaRepository<MemberEntity,Integer> {
@@ -15,33 +16,11 @@ public interface MemberRepo extends JpaRepository<MemberEntity,Integer> {
      */
     MemberEntity getMemberEntityByMemId(String memId);
 
-
-    /**
-     * 회원 리스트 정보 조회
-     * @param name
-     * @param email
-     * @param pageable
-     * @return
-     */
-    Page<MemberEntity> findMemberEntitiesByNameContainsOrEmailContainsOrderByName(String name, String email, Pageable pageable);
-
-    /**
-     * 회원 리스트 정보 조회
-     * @param name
-     * @param pageable
-     * @return
-     */
-    Page<MemberEntity> findMemberEntitiesByNameContainsOrderByName(String name, Pageable pageable);
-
-    /**
-     * 회원 리스트 정보 조회
-     * @param email
-     * @param pageable
-     * @return
-     */
-    Page<MemberEntity> findMemberEntitiesByEmailContainsOrderByName(String email, Pageable pageable);
-
-    Page<MemberEntity> findMemberEntitiesByOrderByName(Pageable pageable);
+    @Query(
+            value = "select m from MemberEntity m where m.email like  CONCAT('%',:email,'%') or m.name like  CONCAT('%',:name,'%')"
+            , countQuery = "select count(m.memId) from MemberEntity m where m.email like  CONCAT('%',:email,'%') or m.name like  CONCAT('%',:name,'%')"
+    )
+    Page<MemberEntity> findMemberEntitiesByEmailNameOrderByName(String name, String email, Pageable pageable);
 
 
 }

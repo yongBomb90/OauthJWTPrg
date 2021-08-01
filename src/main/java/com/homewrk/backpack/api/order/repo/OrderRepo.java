@@ -4,6 +4,7 @@ import com.homewrk.backpack.api.order.domain.OrderEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface OrderRepo  extends JpaRepository<OrderEntity,String> {
 
@@ -13,7 +14,11 @@ public interface OrderRepo  extends JpaRepository<OrderEntity,String> {
      * @param pageable
      * @return
      */
-    Page<OrderEntity> getOrderEntitiesByMemSeqEqualsOrderByOrdDate(Integer memSeq,Pageable pageable);
+    @Query(
+        value = "SELECT O FROM OrderEntity O JOIN MemberEntity M ON O.memSeq = M.seq and M.memId = :memId "
+            , countQuery = "SELECT count(O.ordNum) FROM OrderEntity O JOIN MemberEntity M ON O.memSeq = M.seq and M.memId = :memId "
+    )
+    Page<OrderEntity> getOrderEntitiesByMemIdOrderByOrdDate(String memId,Pageable pageable);
 
 
 }
