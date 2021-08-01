@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 리소스 서버 로그인 controller
  */
+@Api(value = "로그아웃 관련", tags = "logout")
 @Controller
 @RequestMapping("/api")
 public class LoginController {

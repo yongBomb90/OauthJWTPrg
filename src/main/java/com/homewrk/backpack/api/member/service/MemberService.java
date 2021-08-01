@@ -12,10 +12,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+
 
 /**
  * 유저관련 서비스
@@ -43,8 +45,9 @@ public class MemberService implements UserDetailsService {
      * @param memId
      * @return
      */
+    @Transactional(readOnly = true)
     public boolean isDuplMemId(String memId) {
-        return memberRepo.getMemberByMemId(memId) == null ? false : true;
+        return memberRepo.getMemberEntityByMemId(memId) == null ? false : true;
     }
 
     /**
@@ -52,8 +55,9 @@ public class MemberService implements UserDetailsService {
      * @param memId
      * @return
      */
+    @Transactional(readOnly = true)
     public MemberEntity searchMember(String memId) {
-        return memberRepo.getMemberByMemId(memId);
+        return memberRepo.getMemberEntityByMemId(memId);
     }
 
 
@@ -62,8 +66,19 @@ public class MemberService implements UserDetailsService {
      * @param pageable
      * @return
      */
+    @Transactional(readOnly = true)
     public Page<MemberEntity> searchMembers(String name, String email, Pageable pageable) {
-        return memberRepo.findMembersByNameContainsOrEmailContains(name,email,pageable);
+
+        if ( name == null && email == null ) {
+            return memberRepo.findMemberEntitiesByOrderByName(pageable);
+        } else if ( name == null ){
+            return memberRepo.findMemberEntitiesByEmailContainsOrderByName(email,pageable);
+        } else if ( email == null){
+            return memberRepo.findMemberEntitiesByNameContainsOrderByName(name,pageable);
+        } else {
+            return memberRepo.findMemberEntitiesByNameContainsOrEmailContainsOrderByName(name,email,pageable);
+        }
+
     }
 
     /**
@@ -72,9 +87,10 @@ public class MemberService implements UserDetailsService {
      * @param pageable
      * @return
      */
+    @Transactional(readOnly = true)
     public Page<OrderEntity> searchMemberOrders(String memId, Pageable pageable) {
 
-        MemberEntity member = memberRepo.getMemberByMemId(memId);
+        MemberEntity member = memberRepo.getMemberEntityByMemId(memId);
         if ( member == null ) {
             return null;
         }
@@ -88,8 +104,9 @@ public class MemberService implements UserDetailsService {
      * @throws UsernameNotFoundException
      */
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MemberEntity user =  memberRepo.getMemberByMemId(username);
+        MemberEntity user =  memberRepo.getMemberEntityByMemId(username);
         if ( user == null ) {
             throw new UsernameNotFoundException(username);
         }

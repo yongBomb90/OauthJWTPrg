@@ -23,7 +23,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@ApiOperation(value = "유저관련")
+@Api(value = "사용자 관련", tags = "member")
 public class MemberController {
 
 

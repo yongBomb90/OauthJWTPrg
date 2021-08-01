@@ -1,0 +1,392 @@
+{
+	"variables": [],
+	"info": {
+		"name": "백패커_API",
+		"_postman_id": "061930d2-2fd2-a60e-51b7-b98546437cb7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "로그인",
+			"request": {
+				"url": "localhost:8080/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YmFja3BhY2s6VGVzdDEyMzQh",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "test3",
+							"description": "로그인 아이",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Bume2@2391235",
+							"description": "로그인 비밀번",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"description": "토큰 타",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "h-7Sk42PFdhbVfWPzRJ41SsPbSM",
+							"description": "리플레쉬 토",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "3e729348-8943-4381-8fde-9772f054f962",
+					"name": "localhost:8888/oauth/token",
+					"originalRequest": {
+						"url": "localhost:8080/oauth/token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"name": "Authorization",
+								"value": "Basic YmFja3BhY2s6VGVzdDEyMzQh",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "testId",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Bume2@2391235",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "h-7Sk42PFdhbVfWPzRJ41SsPbSM",
+									"description": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "cache-control",
+							"key": "cache-control",
+							"value": "no-store",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 31 Jul 2021 07:35:50 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=60",
+							"description": "Custom header"
+						},
+						{
+							"name": "pragma",
+							"key": "pragma",
+							"value": "no-cache",
+							"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						},
+						{
+							"name": "x-content-type-options",
+							"key": "x-content-type-options",
+							"value": "nosniff",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"name": "x-frame-options",
+							"key": "x-frame-options",
+							"value": "DENY",
+							"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+						},
+						{
+							"name": "x-xss-protection",
+							"key": "x-xss-protection",
+							"value": "1; mode=block",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [],
+					"responseTime": 111,
+					"body": "{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mjc3MjY5NTAsInVzZXJfbmFtZSI6InRlc3QiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiMHJ4d21DQmRSRjYxTU42a3VodUltX2lPV2FRIiwiY2xpZW50X2lkIjoiYmFja3BhY2siLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.VTvPyFmF_tWCfC6-wztzqsMGETQcuYHR4XBsZs2hhVo\",\"token_type\":\"bearer\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ0ZXN0Iiwic2NvcGUiOlsicmVhZCIsIndyaXRlIiwidHJ1c3QiXSwiYXRpIjoiMHJ4d21DQmRSRjYxTU42a3VodUltX2lPV2FRIiwiZXhwIjoxNjI3NzI2OTUwLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoicGtXejRYZGxLc0I2eXpGUXVTcUpkQnFJMFNvIiwiY2xpZW50X2lkIjoiYmFja3BhY2sifQ.Kdvq-zV-W6trq65QceYF2cZKezHTbxiwj3G_M4jmWTM\",\"expires_in\":9999,\"scope\":\"read write trust\",\"jti\":\"0rxwmCBdRF61MN6kuhuIm_iOWaQ\"}"
+				}
+			]
+		},
+		{
+			"name": "회원가입",
+			"request": {
+				"url": "localhost:8080/member/join",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mjc2NTUyMzQsInVzZXJfbmFtZSI6InRlc3QiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoicUNPS3F4dW1zeVpZYkZKNDRlU2ZSMTNpZmpFIiwiY2xpZW50X2lkIjoiYmFja3BhY2siLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.AibbrhGjoKbWnlUu3v92zvKXELjNs4lRlMabVYjUh3M",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "access_token",
+						"value": "gjrVpwGJGrYlZQpG2GjTv241bSM",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"memId\" : \"test3\"\n\t, \"email\" : \"joinTest@gmail.com\"\n\t, \"name\" : \"test\"\n\t, \"nickName\" : \"test\"\n\t, \"pwd\" : \"Bume2@2391235\"\n\t, \"phnNum\" : \"0109171\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "회원상세조회",
+			"request": {
+				"url": "localhost:8080/api/member/joinTest@gmail.com",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mjc3OTI1ODQsInVzZXJfbmFtZSI6InRlc3QiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoickR1Q3Iya2NXcUhpLVNkLXJhbXhwVGh5VXVvIiwiY2xpZW50X2lkIjoiYmFja3BhY2siLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.YJCRaVSSognNXVZH0pgpeAd8UMKVizAOAJPIxx64UuY",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userId",
+							"value": "ybTest10",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "bomb",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "userName",
+							"value": "Name",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "nickName",
+							"value": "01091713590",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "docsuli@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "1234",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "회원리스트조회",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/api/member/list?name=123&email=g",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"member",
+						"list"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "123",
+							"equals": true,
+							"description": "이름 "
+						},
+						{
+							"key": "email",
+							"value": "g",
+							"equals": true,
+							"description": "이메일"
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"equals": true,
+							"description": "현재 페이",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "1",
+							"equals": true,
+							"description": "",
+							"disabled": true
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mjc4MjUwMjksInVzZXJfbmFtZSI6InRlc3QiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiSXR1QmtOX1VjaERTV0VvTkg5VXRIaVJmb0dnIiwiY2xpZW50X2lkIjoiYmFja3BhY2siLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.uqQ996GRtWQNMKPkht6zu_pRUmp4959_HV_Q-B99rQs",
+						"description": "Access-token"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "회원의 주문리스트",
+			"request": {
+				"url": "localhost:8080/api/member/testId/orders",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mjc3OTMyMDksInVzZXJfbmFtZSI6InRlc3QiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiUmRCU25yZFBnV0RoeGRiaWJsWlpsb3A5a2RJIiwiY2xpZW50X2lkIjoiYmFja3BhY2siLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.HzPD6TWtROKPRGzfKKOTOTR_pMNY1B47ccah-2SWIEA",
+						"description": "회원의 주문"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "",
+						"value": "",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "로그아웃",
+			"request": {
+				"url": "localhost:8080/api/logout",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mjc3OTI1ODQsInVzZXJfbmFtZSI6InRlc3QiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoickR1Q3Iya2NXcUhpLVNkLXJhbXhwVGh5VXVvIiwiY2xpZW50X2lkIjoiYmFja3BhY2siLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.YJCRaVSSognNXVZH0pgpeAd8UMKVizAOAJPIxx64UuY",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -28,26 +28,16 @@ import java.util.List;
 public class SwaggerConfig {
 
     /**
-     * 모든 API swagger 대상
+     * 모든 리소스 API swagger 대상
      * @return
      */
-//    @Bean
-//    public Docket api(){
-//        return new Docket(DocumentationType.SWAGGER_2)
-//                .select()
-//                .apis(RequestHandlerSelectors.any())
-//                .paths(PathSelectors.any())
-//                .build()
-//                .pathMapping("/");
-//    }
-
     @Bean
     public Docket api(){
 
 
         Parameter parameterBuilder = new ParameterBuilder()
             .name(HttpHeaders.AUTHORIZATION)
-                .description("Access Tocken")
+                .description("Access Tocken(Bearer +accessToken)")
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
                 .required(false)
@@ -77,6 +67,10 @@ public class SwaggerConfig {
 
     }
 
+    /**
+     * 로그인 API swagger 대상
+     * @return
+     */
     @Bean
     public Docket apiV2(){
 
@@ -90,24 +84,27 @@ public class SwaggerConfig {
                 , "-"
                 ,  new ArrayList<>());
 
+        Parameter parameterBuilder = new ParameterBuilder()
+                .name(HttpHeaders.AUTHORIZATION)
+                .description("Api key(Basic YmFja3BhY2s6VGVzdDEyMzQh)")
+                .modelRef(new ModelRef("string"))
+                .parameterType("header")
+                .required(false)
+                .build();
+        List<Parameter> globalParamters = new ArrayList<>();
+        globalParamters.add(parameterBuilder);
+
         return new Docket(DocumentationType.SWAGGER_2)
+                .globalOperationParameters(globalParamters)
                 .groupName("권한서버(로그인)")
                 .useDefaultResponseMessages(false)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.ant("/oauth/token"))
                 .build()
-                .apiInfo(authApiInfo)
-                .securitySchemes(Arrays.asList(apiKey2()));
+                .apiInfo(authApiInfo);
 
     }
 
-    private ApiKey apiKey2() {
-        return new ApiKey("Basic YmFja3BhY2s6VGVzdDEyMzQh", "Authorization", "header");
-    }
-
-    private ApiKey apiKey() {
-        return new ApiKey("Bearer +accessToken", "Authorization", "header");
-    }
 
 }

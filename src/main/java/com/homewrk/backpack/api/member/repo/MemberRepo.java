@@ -13,7 +13,7 @@ public interface MemberRepo extends JpaRepository<MemberEntity,Integer> {
      * @param memId
      * @return
      */
-    MemberEntity getMemberByMemId(String memId);
+    MemberEntity getMemberEntityByMemId(String memId);
 
 
     /**
@@ -23,11 +23,25 @@ public interface MemberRepo extends JpaRepository<MemberEntity,Integer> {
      * @param pageable
      * @return
      */
-    Page<MemberEntity> findMembersByNameContainsOrEmailContains(String name, String email, Pageable pageable);
+    Page<MemberEntity> findMemberEntitiesByNameContainsOrEmailContainsOrderByName(String name, String email, Pageable pageable);
 
+    /**
+     * 회원 리스트 정보 조회
+     * @param name
+     * @param pageable
+     * @return
+     */
+    Page<MemberEntity> findMemberEntitiesByNameContainsOrderByName(String name, Pageable pageable);
 
+    /**
+     * 회원 리스트 정보 조회
+     * @param email
+     * @param pageable
+     * @return
+     */
+    Page<MemberEntity> findMemberEntitiesByEmailContainsOrderByName(String email, Pageable pageable);
 
-
+    Page<MemberEntity> findMemberEntitiesByOrderByName(Pageable pageable);
 
 
 }
