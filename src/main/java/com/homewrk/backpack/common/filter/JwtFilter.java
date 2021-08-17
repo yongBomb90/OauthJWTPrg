@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.stream.Stream;
 
 
 @Component
@@ -32,10 +33,17 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 로그아웃 블랙리스트 검사처리
         String token = request.getHeader("Authorization");
+
         if ( token != null && redisTemplate.opsForValue().get(token) != null ) {
             SecurityContextHolder.getContext().setAuthentication(null);
             request.getSession().removeAttribute("Authorization");
         }
         filterChain.doFilter(request, response);
+    }
+
+    public static void main(String[] args) {
+        Stream<String> strStream = Stream.of(new String[]{"1","2","3"});
+        Stream<Integer> intStream =   strStream.distinct().map(o1 -> Integer.parseInt(o1));
+        System.out.println(intStream.peek(System.out::println).count());
     }
 }
